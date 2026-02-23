@@ -27,11 +27,11 @@ title: "Artifact 1: Software Engineering & Design"
 
 ## What Existed Before
 
-The original CS-360 artifact was a single-Activity Android application where business logic, data storage, and authentication all lived in the UI layer. There was no separation of concerns, no network connectivity, no external server, and no dependency injection -- manual object creation was scattered throughout Activity classes. Security consisted of basic password hashing with no token-based authentication.
+The original CS-360 artifact was a single-Activity Android application where business logic, data storage, and authentication all lived in the UI layer. There was no separation of concerns, no network connectivity, no external server, and no dependency injection having manual object creation was scattered throughout Activity classes. Security consisted of basic password hashing with no token-based authentication.
 
 ## The Enhancement Goal
 
-Transform the monolith into a **distributed full-stack ecosystem** -- a Kotlin Android client communicating with a Java Spring Boot server via REST -- to demonstrate architectural decoupling, modern design patterns, secure coding, and the engineering judgment to manage complexity across 80+ source files.
+Transform the monolith into a **distributed full-stack ecosystem** where a Kotlin Android client communicating with a Java Spring Boot server via REST. The goal was to demonstrate architectural decoupling, modern design patterns, secure coding, and the engineering judgment to manage complexity across 80+ source files.
 
 ---
 
@@ -120,17 +120,17 @@ This artifact was selected because it offered the perfect canvas to demonstrate 
 
 The heart of this enhancement is the adoption of **well-founded and innovative techniques** to deliver a professional-quality system. Every architectural decision was deliberate:
 
-**MVVM + StateFlow + Channel** was applied consistently across all 5 screens. Each screen follows an identical pattern: the Fragment/Activity is a thin view layer that observes a ViewModel's `StateFlow<UiState>` for data and `Channel<Event>` for one-shot navigation or error events. This consistency is intentional -- it means any developer familiar with one screen can immediately navigate any other, reducing onboarding friction and demonstrating mastery of modern Android architecture.
+**MVVM + StateFlow + Channel** was applied consistently across all 5 screens. Each screen follows an identical pattern: the Fragment/Activity is a thin view layer that observes a ViewModel's `StateFlow<UiState>` for data and `Channel<Event>` for one-shot navigation or error events. This consistency is intentional to allow for outside developers to gain familiarity with one screen informing their understanding of the remaining screrens. 
 
-**Hilt Dependency Injection** replaced manual object creation with four `@SingletonComponent`-scoped modules (App, Network, Database, Repository). All five ViewModels use `@HiltViewModel` with `@Inject constructor`, enabling compile-time dependency verification. This isn't just cleaner code -- it demonstrates understanding that testable, modular architecture is the foundation of maintainable software.
+**Hilt Dependency Injection** replaced manual object creation with four `@SingletonComponent`-scoped modules (App, Network, Database, Repository). All five ViewModels use `@HiltViewModel` with `@Inject constructor`, enabling compile-time dependency verification. This demonstrates understanding that testable, modular architecture is the foundation of maintainable software.
 
-**Offline-First Synchronization** via WorkManager was the most complex engineering challenge. The system implements a 3-phase push/pull/cleanup protocol with server-wins conflict resolution, connectivity monitoring via `callbackFlow`, and periodic background sync. The details of this protocol are covered in [Artifact 3: Databases](milestone3), but from a software engineering perspective, the key insight was designing a system where the user never has to think about network state -- data is always available locally, and synchronization happens transparently.
+**Offline-First Synchronization** via WorkManager was the most complex engineering challenge. The system implements a 3-phase push/pull/cleanup protocol with server-wins conflict resolution, connectivity monitoring via `callbackFlow`, and periodic background sync. The details of this protocol are covered in [Artifact 3: Databases](milestone3), but from a software engineering perspective, the key insight was designing a system where the user never has to think about network state.  Whether the app is online or not, data is always available locally, and synchronization happens transparently.
 
 **Retrofit + Coroutines** bridges the client and server via 10 suspend functions mapping to REST endpoints. All network operations execute off the Main Thread, preventing UI freezes. The Repository pattern abstracts whether data comes from Room (local) or the server (remote), with `WeightRepository` implementing the offline-first write strategy: local insert first, then server attempt, with SyncWorker retry on failure.
 
 ### Security Mindset
 
-Security was implemented as a **cross-cutting concern**, not a bolted-on feature. The original artifact employed basic password hashing and input sanitization. I wanted to demonstrate secure coding throughout the entire project -- applying what I learned about JWT in the Full Stack course to a completely different technology stack.
+Security was implemented as a **feature from the start**, not a bolted-on feature. The original artifact employed basic password hashing and input sanitization. I wanted to demonstrate secure coding throughout the entire project by applying what I learned about JWT in the Full Stack course to a completely different technology stack.
 
 **Server-side**: JWT access tokens (24h dev / 1h prod) with 7-day refresh tokens, a security filter chain with STATELESS sessions and explicit endpoint permissions, a token blacklist via `ConcurrentHashMap.newKeySet()` with hourly cleanup, error sanitization preventing username enumeration ("Invalid username or password" rather than "Username not found"), secrets externalization via Spring Profiles (dev hardcoded, prod uses environment variables), CORS with explicit origin allowlists, and conditional HTTPS enforcement.
 
@@ -160,9 +160,9 @@ This documentation standardization directly addresses the need to **employ strat
 
 ### Professional Communications
 
-This portfolio itself -- the self-assessment, the three enhancement narratives, and the ePortfolio website -- demonstrates the ability to **communicate technical complexity to diverse audiences**. The system architecture diagram above, the request lifecycle diagrams in controller headers, and the milestone narratives are designed to be readable by both technical reviewers and non-technical stakeholders.
+This portfolio itself consistiing of the self-assessment, the three enhancement narratives, and the ePortfolio website demonstrates the ability to **communicate technical complexity to diverse audiences**. The system architecture diagram above, the request lifecycle diagrams in controller headers, and the milestone narratives are designed to be readable by both technical reviewers and non-technical stakeholders.
 
-The decision to maintain a living priority matrix (P0-P8) throughout development functioned as a product roadmap -- making deliberate, transparent decisions about what to build, what to defer, and what to sunset, with clear rationale for each.
+The decision to maintain a living priority matrix (P0-P8) throughout development functioned as a product roadmap helping make deliberate, transparent decisions about what to build, what to defer, and what to sunset, with clear rationale for each.
 
 ---
 
@@ -170,9 +170,9 @@ The decision to maintain a living priority matrix (P0-P8) throughout development
 
 The process of enhancing WeightSmart was a lesson in managing complexity. The biggest challenge was the offline-first synchronization -- designing a system where data flows bidirectionally between a local SQLite cache and a remote PostgreSQL database with conflict resolution, tombstone tracking, and retry logic.
 
-The scope was deliberately reduced from the original blueprint to prioritize **depth over breadth**. The implemented Android + Spring Boot stack demonstrates the full range of planned skills -- architecture, mobile design, full-stack development, secure coding, system integration -- without the dilution of adding a third platform. The unified REST API contract was designed to support future Angular consumption without modification.
+The scope was deliberately reduced from the original blueprint to prioritize **depth over breadth**. The implemented Android + Spring Boot stack demonstrates the full range of planned skills in architecture, mobile design, full-stack development, secure coding, system integration.  Learning to focus in on scope allowed thorough work to be completed without the dilution of adding a third platform. The unified REST API contract was designed to support future Angular consumption without modification.
 
-> This artifact demonstrates an ability to evolve a simple, disconnected mobile application into a sophisticated distributed system -- and more importantly, the engineering judgment to know when depth of implementation outweighs breadth of scope.
+> This artifact demonstrates an ability to evolve a simple, disconnected mobile application into a sophisticated distributed system and more importantly, the engineering judgment to know when depth of implementation outweighs breadth of scope.
 
 ---
 
