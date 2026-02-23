@@ -31,30 +31,29 @@ The original CS-360 artifact stored weight data in a local-only Room database wi
 
 ## The Enhancement Goal
 
-Migrate from local-only storage to a **distributed dual-layer architecture** -- PostgreSQL as the authoritative source of truth with Room as a local cache -- implementing proper indexing strategies, an offline-first synchronization protocol, encrypted session storage, and data integrity controls that handle the messy realities of intermittent connectivity and concurrent access.
+Migrate from local-only storage to a **distributed dual-layer architecture** using PostgreSQL as the authoritative source of truth with Room as a local cache.  Additionally, the enhancemnt involved implementing proper indexing strategies, an offline-first synchronization protocol, encrypted session storage, and data integrity controls that handle the messy realities of intermittent connectivity and concurrent access.
 
 ---
 
 ## Why This Artifact
 
-This artifact was selected because the data storage implementation reflected a minimum viable approach -- a skeleton through which I could demonstrate database design skills. This enhancement is strongest at demonstrating mastery of **software engineering and databases** through:
+This artifact was selected because the data storage implementation reflected a minimum viable approach which acted as a skeleton through which I could demonstrate database design skills. This enhancement is strongest at demonstrating mastery of **software engineering and databases** through:
 
 1. **Relational schema design** with proper normalization, constraints, and the architectural decision to use UUIDs for offline ID generation rather than sequential integers
 2. **Indexing strategy selection** -- matching B-tree indexes to specific query patterns, understanding why a B-tree on `username` is more versatile than the originally planned Hash index
 3. **Distributed systems thinking** -- the 3-phase offline-first sync protocol with tombstone-based soft deletes, delta synchronization, and server-wins conflict resolution
 4. **Data integrity** -- optimistic locking, transactional atomicity, and encrypted session storage
 
-The most significant learning was understanding why **soft deletes are essential in offline-first architecture**. My initial instinct was to physically delete rows, but I quickly realized that an offline client would have no way to know a record was removed -- leading to "ghost data" that persists locally forever. This insight drove the entire tombstone pattern, the delta sync endpoint, and the 3-phase cleanup protocol.
-
 ---
 
 ## Indexing Strategy: Designing Computing Solutions
 
-The entire project encompassed designing and evaluating computing solutions through indexing decisions. The original plan specified a **Hash Index** on `username` for O(1) equality lookups during authentication. During implementation, I recognized that B-tree was the better choice -- it supports both equality *and* range queries (needed for the [Trie-based prefix search](milestone2)), while Hash only supports equality. This trade-off between O(1) and O(log n) is negligible for the expected dataset size, making B-tree the more versatile structure.
+The project encompassed designing and evaluating computing solutions through indexing decisions. The username column uses a Hash index for O(1) equality lookups during authentication — login, JWT validation, and profile retrieval are all equality-only queries (WHERE username = ?), making Hash the optimal structure. Because JPA's @Index annotation only supports B-tree, this required a schema.sql file with PostgreSQL-native DDL (CREATE INDEX ... USING hash), executed after Hibernate's auto-DDL via deferred datasource initialization. Prefix search is handled entirely by the in-memory milestone2, so the database index never needs to support range or LIKE queries. The UNIQUE constraint on username still maintains its own B-tree for duplicate prevention.
+
 
 ```
 users table:
-    idx_users_username      B-tree on (username)          ← Auth lookups: O(log n)
+    idx_users_username      Hash on (username)            ← Auth lookups: O(log n)
     UNIQUE on username      Auto-generated B-tree         ← Duplicate prevention
     UNIQUE on email         Auto-generated B-tree         ← Duplicate prevention
 
@@ -69,7 +68,7 @@ The `idx_user_updated` composite index was added specifically for the delta sync
 
 ## Offline-First Synchronization: Innovative Techniques
 
-The offline-first sync protocol is the most architecturally significant achievement. It demonstrates mastery of **well-founded and innovative techniques** -- specifically, distributed systems patterns that ensure data integrity across multiple clients with intermittent connectivity.
+The offline-first sync protocol is the most architecturally significant achievement. It demonstrates mastery of **well-founded and innovative techniques** such as distributed systems patterns that ensure data integrity across multiple clients with intermittent connectivity.
 
 ### The 3-Phase Protocol
 
@@ -116,7 +115,7 @@ The sync system provides four layers of resilience: `ConnectivityObserver` (trig
 
 ### Optimistic Locking
 
-Both `User` and `WeightEntry` entities carry `@Version` fields. Hibernate auto-increments the version on every UPDATE and includes `WHERE version = ?` in the SQL. If two concurrent requests modify the same row, the second receives a `StaleObjectStateException` -- preventing silent data corruption.
+Both `User` and `WeightEntry` entities carry `@Version` fields. Hibernate auto-increments the version on every UPDATE and includes `WHERE version = ?` in the SQL. If two concurrent requests modify the same row, the second receives a `StaleObjectStateException` thus preventing silent data corruption.
 
 > **Bug Discovery**: Adding `@Version` to `User.java` caused existing database rows (with `version = NULL`) to throw `DataIntegrityViolationException` on every save. The fix required both a code change (`columnDefinition = "integer default 0"`, `version = 0`) and a database backfill. This was a valuable lesson in the gap between schema design theory and production deployment reality.
 
@@ -130,7 +129,7 @@ The `updateCurrentWeightCache()` method filters out soft-deleted entries (`isDel
 
 ### Pre-Logout Data Flush
 
-A `pushPendingChanges()` method was added as defense-in-depth: called during logout before clearing the session, it pushes all unsynced entries to the server. This closes the edge case where an immediate API call failed, SyncWorker hasn't retried yet, and the user logs out -- without the flush, those changes would be silently lost.
+A `pushPendingChanges()` method was added as defense-in-depth: called during logout before clearing the session, it pushes all unsynced entries to the server. This closes the edge case where an immediate API call failed, SyncWorker hasn't retried yet, and the user logs out. Without the flush, those changes would be silently lost.
 
 ### Encrypted Session Storage
 
@@ -167,9 +166,9 @@ This enhancement is strongest at demonstrating mastery of **databases and softwa
 
 ## Reflection
 
-The process of enhancing WeightSmart's database architecture reinforced several important lessons about distributed data management. The most significant was the tombstone insight -- that physical deletes are incompatible with offline-first architecture. This single realization cascaded into the entire sync protocol design: audit timestamps, soft-delete flags, delta endpoints, and cleanup phases.
+The process of enhancing WeightSmart's database architecture reinforced several important lessons about distributed data management. The most significant was the tombstone insight which showed that physical deletes are incompatible with offline-first architecture. This single realization cascaded into the entire sync protocol design: audit timestamps, soft-delete flags, delta endpoints, and cleanup phases.
 
-The scope significantly exceeded the original Module One plan: sync metadata fields were not anticipated, the tombstone pattern was not planned, the delta sync endpoint goes beyond the simple full-pull strategy originally described, and optimistic locking added production-quality concurrency guards. The `@Version` bug -- where existing NULL rows broke all save operations -- was a particularly valuable lesson in the gap between schema design theory and production deployment reality.
+The scope significantly exceeded the original Module One plan: sync metadata fields were not anticipated, the tombstone pattern was not planned, the delta sync endpoint goes beyond the simple full-pull strategy originally described, and optimistic locking added production-quality concurrency guards.
 
 > This artifact demonstrates the ability to evolve a single-device, unindexed local database into a distributed dual-layer architecture with proper indexing, synchronization, encryption, and data integrity controls -- engineering that tolerates the messy realities of intermittent connectivity, concurrent access, and adversarial environments.
 
