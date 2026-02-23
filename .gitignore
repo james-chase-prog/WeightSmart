@@ -85,7 +85,7 @@ yarn-error.log*
 # -------------------------
 # Working documents (not for repo)
 # -------------------------
-/_working_docs/
+# /_working_docs/
 
 # -------------------------
 # Nested repos (separate git remotes)

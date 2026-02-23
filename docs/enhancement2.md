@@ -25,6 +25,8 @@ title: "Artifact 2: Algorithms & Data Structures"
 <a href="enhancement3">Artifact 3: Databases &rarr;</a>
 </div>
 
+<small><a href="https://github.com/james-chase-prog/WeightSmart/raw/main/_working_docs/CS499%20Milestone%203.docx">Download Original Submission (docx)</a></small>
+
 ## What Existed Before
 
 The original CS-360 artifact had no attention to time complexity. Registration checked linearly through a list of registered users -- **O(N)** -- and there was no rate limiting, no debouncing, no sorted data views, and no intelligent data structures of any kind. The codebase was full of inefficient O(N) operations ignored for the sake of building a functional UI/UX.

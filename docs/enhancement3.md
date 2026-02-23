@@ -25,6 +25,8 @@ title: "Artifact 3: Databases"
 <a href="./">Self-Assessment &rarr;</a>
 </div>
 
+<small><a href="https://github.com/james-chase-prog/WeightSmart/raw/main/_working_docs/CS499%20Milestone%204.docx">Download Original Submission (docx)</a></small>
+
 ## What Existed Before
 
 The original CS-360 artifact stored weight data in a local-only Room database with **no indexing, no pagination, no audit trail, no server-side database, and no synchronization** across multiple clients. There was no mechanism for data to leave the device, no concept of soft deletes, and session data was stored in basic SharedPreferences without encryption.

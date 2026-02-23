@@ -25,6 +25,8 @@ title: "Artifact 1: Software Engineering & Design"
 <a href="enhancement2">Artifact 2: Algorithms &rarr;</a>
 </div>
 
+<small><a href="https://github.com/james-chase-prog/WeightSmart/raw/main/_working_docs/CS499%20Milestone%202.docx">Download Original Submission (docx)</a></small>
+
 ## What Existed Before
 
 The original CS-360 artifact was a single-Activity Android application where business logic, data storage, and authentication all lived in the UI layer. There was no separation of concerns, no network connectivity, no external server, and no dependency injection having manual object creation was scattered throughout Activity classes. Security consisted of basic password hashing with no token-based authentication.

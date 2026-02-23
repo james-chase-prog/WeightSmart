@@ -25,6 +25,7 @@ title: WeightSmart — Professional Self-Assessment
 ---
 
 ## Professional Self-Assessment
+<small><a href="https://github.com/james-chase-prog/WeightSmart/raw/main/_working_docs/CS499%20Professional%20Self%20Assessment.docx">Download Original Submission (docx)</a></small>
 
 ### Executive Summary
 
