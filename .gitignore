@@ -94,11 +94,6 @@ yarn-error.log*
 /james-chase-prog.github.io/
 
 # -------------------------
-# Claude Code local settings
-# -------------------------
-.claude/
-
-# -------------------------
 # Misc junk files
 # -------------------------
 nul
