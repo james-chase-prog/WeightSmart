@@ -31,7 +31,7 @@ The original CS-360 artifact had no attention to time complexity. Registration c
 
 ## The Enhancement Goal
 
-Replace linear scans with purpose-built data structures, implement a **search-as-you-go** username registration feature powered by a Prefix Tree (Trie), and protect all exposed endpoints with a Token Bucket rate limiter -- demonstrating the ability to **design and evaluate computing solutions using algorithmic principles** while maintaining a **security-first mindset**.
+Replace linear scans with purpose-built data structures, implement a **search-as-you-go** username registration feature powered by a Prefix Tree (Trie), and protect all exposed endpoints with a Token Bucket rate limiter which demonstrates the ability to **design and evaluate computing solutions using algorithmic principles** while maintaining a **security-first mindset**.
 
 ---
 
@@ -44,7 +44,7 @@ This artifact was selected because the inefficiencies in the original code provi
 
 The Trie replaced O(N) linear scans with O(L) lookups. But Tries are inherently heap memory greedy, so I made a series of design choices to limit their weakness: sparse initialization, recursive pruning on delete, and a 3 AM daily rebuild. I also identified the data volatility of the Trie and chose to use it **only for search** -- the actual registration uniqueness check trusts the B-tree index over PostgreSQL, which natively prevents duplicate user creation. This distinction demonstrates understanding that **in-memory data structures are caches, not sources of truth**.
 
-By focusing on the exploitable weakness of the Trie -- that without guardrails, a malicious user could map out all usernames by scripting rapid prefix searches -- I was driven to implement the Token Bucket algorithm and brute-force prevention methods. This demonstrates a **security focus at the software level**, a critical behavior for the growing field of zero trust architecture.
+I quickily identified the weakness of the Trie which is that without guardrails, a malicious user could map out all usernames by scripting rapid prefix searches. This drove implementation of the Token Bucket algorithm and brute-force prevention methods. This demonstrates a **security focus at the software level**, a critical behavior for the growing field of zero trust architecture.
 
 ---
 
@@ -52,7 +52,7 @@ By focusing on the exploitable weakness of the Trie -- that without guardrails, 
 
 ### How It Works
 
-A Trie connects child nodes representing single characters. As the user types, a path is traced from the root down node by node. When the user types a character that does not exist within the current node path, the search terminates immediately -- the prefix doesn't exist.
+A Trie connects child nodes representing single characters. As the user types, a path is traced from the root down node by node. When the user types a character that does not exist within the current node path, the search terminates immediately - the prefix doesn't exist.
 
 ```
            Root
@@ -69,7 +69,7 @@ A Trie connects child nodes representing single characters. As the user types, a
 (end: "james") (end: "jamie") (end: "janet")
 ```
 
-Usernames "james", "jamie", and "janet" share the "ja" prefix, requiring **2 shared nodes** instead of 6 -- demonstrating the space efficiency of sparse allocation. Only characters that exist in actual usernames create child entries (lazy initialization, matching the Module One plan).
+Usernames "james", "jamie", and "janet" share the "ja" prefix, requiring **2 shared nodes** instead of 6.  This was the core reason for choosing the space efficiency of sparse allocation. Only characters that exist in actual usernames create child entries (lazy initialization, matching the Module One plan).
 
 ### Complexity Improvement
 
@@ -83,7 +83,7 @@ For 10,000 users and a 10-character username, the old approach required up to **
 
 ### Write-Through Cache Pattern
 
-A key learning during implementation: the Trie became stale immediately after a new user registered. I initially forgot to update it, meaning the search index was inconsistent the moment a registration succeeded. The fix -- calling `TrieService.insert()` directly from `UserService.registerUser()` -- constitutes a **write-through cache pattern**:
+When a new user registers, the system updates both the persistent store and the in-memory index in a single operation — a write-through cache pattern:
 
 ```
 Register User
@@ -91,7 +91,7 @@ Register User
     └── trieService.insert(username)  ← Trie (in-memory cache)
 ```
 
-This was documented in the Milestone 3 course submission as a key learning moment and directly demonstrates the ability to **design computing solutions that manage data consistency across abstraction layers**.
+This ensures the Trie search index remains consistent with the database at all times, eliminating the window where a newly registered username would be invisible to the prefix search. This demonstrates **design computing solutions that manage data consistency across abstraction layers**.
 
 ### Memory Lifecycle Management
 
@@ -102,7 +102,7 @@ Tries consume heap memory proportional to the total character count of all store
 | **Recursive Delete** | On demand | Backtracks up the call stack, pruning empty branches |
 | **Daily Rebuild** | 3:00 AM cron | Atomic swap: new tree from PostgreSQL, old root replaced via `volatile` reference |
 
-The `volatile` keyword ensures Java Memory Model happens-before visibility -- any thread reading `root` after the swap sees the fully-constructed new tree. This demonstrates understanding of **concurrent data structure correctness**, not just functional correctness.
+The `volatile` keyword ensures Java Memory Model happens-before visibility - any thread reading `root` after the swap sees the fully-constructed new tree. This demonstrates understanding of **concurrent data structure correctness**, not just functional correctness.
 
 ---
 
@@ -178,7 +178,7 @@ Beyond the Trie and Token Bucket, this enhancement includes several additional a
 This enhancement is strongest at demonstrating mastery of **data structures and algorithms** and **security-focused development**. The Trie provides O(L) lookup where the original monolith required O(N). The Token Bucket provides O(1) rate checking. But beyond raw complexity improvements, the enhancement demonstrates:
 
 - **Evaluating computing solutions**: The decision to trust the B-tree index for registration uniqueness (not the Trie) shows understanding of when in-memory structures are appropriate versus when persistent guarantees are required
-- **Security mindset**: Every algorithm was analyzed for exploitable weaknesses -- the Trie's enumeration vulnerability drove the Token Bucket, the Trie's memory greed drove sparse allocation and pruning, the search endpoint's exposure drove layered client/server defenses
+- **Security mindset**: Every algorithm was analyzed for exploitable weaknesses - the Trie's enumeration vulnerability drove the Token Bucket, the Trie's memory greed drove sparse allocation and pruning, the search endpoint's exposure drove layered client/server defenses
 - **Innovative techniques**: Coroutine-based debounce via structured concurrency, `ConcurrentHashMap` for thread-safe rate limiting, `@PostConstruct` + `@Scheduled` for Trie lifecycle management
 - **Collaborative environments**: Educational-style Javadoc/KDoc across TrieService, RateLimiterService, and RegistrationViewModel with Big-O analysis and concept references
 - **Professional communications**: This narrative articulates the Write-Through Cache learning moment and the Trie-to-Token-Bucket security reasoning for both technical and non-technical audiences
@@ -187,9 +187,9 @@ This enhancement is strongest at demonstrating mastery of **data structures and 
 
 ## Reflection
 
-The process of enhancing WeightSmart's algorithmic layer was an exercise in balancing theoretical efficiency with practical application. The key learning was that **data structures have operational requirements beyond their core operations** -- insertion, search, and deletion are only part of the story. Memory management, consistency guarantees, and security hardening are equally important for production systems.
+The process of enhancing WeightSmart's algorithmic layer was an exercise in balancing theoretical efficiency with practical application. The key learning was that **data structures have operational requirements beyond their core operations** of insertion, search, and deletion.  Memory management, consistency guarantees, and security hardening are equally important for production systems.
 
-The implementation went beyond the original Module One blueprint in several meaningful ways: the planned boolean `/check-availability` endpoint became a richer prefix search; single-scope rate limiting expanded to dual-scope protection; and P1 memory leak remediation added lifecycle management the original plan never contemplated. Each extension was driven by real problems discovered during development -- the kind of iterative refinement that distinguishes production engineering from academic exercises.
+The implementation went beyond the original Module One blueprint in several meaningful ways: the planned boolean `/check-availability` endpoint became a richer prefix search; single-scope rate limiting expanded to dual-scope protection; and P1 memory leak remediation added lifecycle management the original plan never contemplated. Each extension was driven by real problems discovered during development. This is reflective of the kind of iterative refinement that distinguishes production engineering from academic exercises.
 
 > This artifact demonstrates the ability to identify algorithmic inefficiencies, replace them with purpose-built data structures that maximize performance, and protect those structures from adversarial exploitation -- understanding that the correct choice is always a game of trade-offs between memory, efficiency, and security.
 
