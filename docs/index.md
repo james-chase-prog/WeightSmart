@@ -99,7 +99,7 @@ Migrated from local-only Room storage to a distributed relational model using <s
 </tr>
 </table>
 
-> Together, these artifacts illustrate my capacity to design and deliver professional-grade software solutions that are **scalable**, **efficient**, and **secure**.
+> Together, these artifacts demonstrate my capacity to design and deliver professional-grade software solutions that are **scalable**, **efficient**, and **secure**.
 
 ---
 
@@ -163,7 +163,7 @@ I have developed the use of well-founded and innovative techniques, skills, and 
 └─────────────────────┘                       └──────────────────────┘
 ```
 
-In the database layer, I match specific indexing strategies — B-tree for chronological range scans, composite indexes for delta sync performance — to their ideal use cases, and enforce data integrity through optimistic locking and soft-delete tombstone patterns.
+In the database layer, I match specific indexing strategies such as composite B-tree for chronological range scans and composite indexes for delta sync performance to their ideal use cases, and enforce data integrity through optimistic locking and soft-delete tombstone patterns.
 
 ---
 
@@ -189,15 +189,15 @@ Focusing on anticipating adversarial exploits during development allows me to mi
 
 Before diving into the enhanced artifacts, the following video series presents a structured code review of the **original CS-360 monolith** — the application as it existed before any capstone enhancements. These reviews establish the baseline that motivated every architectural decision documented in the enhancement narratives that follow. The original source code is available [here](https://github.com/james-chase-prog/WeightSmart/tree/main/WeightSmartApp).
 
-**Video 1: Architectural Integrity & MVVM Implementation** — This review examines the original application's package structure, revealing that while Clean Architecture layers were present (core, data, domain, UI), the MVVM pattern was incomplete. ViewModels existed as empty stubs while Fragments directly injected and called UseCases — bypassing the ViewModel layer entirely. The review identifies dead code, monolithic leftovers such as unused injections and stub implementations, and assesses the application's readiness for client-server communication — noting the complete absence of networking libraries, API interfaces, and remote data source patterns.
+**Video 1: Architectural Integrity & MVVM Implementation** — This review examines the original application's package structure, revealing that while Clean Architecture layers were present (core, data, domain, UI), the MVVM pattern was incomplete. ViewModels existed as empty stubs while Fragments directly injected and called UseCases resulting in bypassing the undeveloped ViewModel layer entirely. The review identifies dead code, monolithic leftovers such as unused injections and stub implementations, and assesses the application's readiness for client-server communication. Within this assessment I assess the complete absence of networking libraries and API interfaces.
 
-<div align="center"><em>VIDEO_PLACEHOLDER_1</em></div>
+<div align="center"><em>[Full Code Review](https://youtu.be/kxVFK3ui6yA)</em></div>
 
-**Video 2: Defensive Programming & Security Audit** — This review audits input validation across registration fields (username bounds, password length, email regex, weight range), identifies gaps such as missing bounds checks in the Weight factory method and absent network timeout configuration, and evaluates floating-point handling. The review highlights both strengths — BigDecimal rounding, zero-division guards, epsilon comparisons for floating-point equality — and areas for improvement, including resource management patterns and the need for defensive null-safety when transitioning from local Room queries to server JSON responses.
+**Video 2: Defensive Programming & Security Audit** — This review audits input validation across registration fields (username bounds, password length, email regex, weight range), identifies gaps such as missing bounds checks in the Weight factory method and absent network timeout configuration, and evaluates floating-point handling. The review highlights both strengths such as BigDecimal rounding, zero-division guards, epsilon comparisons for floating-point equality as well as areas for improvement, including resource management patterns and the need for defensive null-safety when transitioning from local Room queries to server JSON responses. Here I also discuss how transitioning to a distributed architecture changes the security needs and the decision to implement JWT authentication. 
 
 <div align="center"><em>VIDEO_PLACEHOLDER_2</em></div>
 
-**Video 3: Code Quality, Maintainability & Documentation** — This review evaluates the codebase's long-term maintainability by examining variable naming conventions, type safety opportunities (String fields that should be enums), and documentation coverage gaps across UseCases and Repositories. It identifies modules carrying too many responsibilities — such as TableFragment handling pagination, sorting, filtering, data fetching, and delete logic in a single class — and audits constants extraction, if/case branch coverage, and adherence to Android/Kotlin naming standards.
+**Video 3: Code Quality, Maintainability & Documentation** — This review evaluates the codebase's long-term maintainability by examining variable naming conventions, type safety opportunities (String fields that should be enums), and documentation coverage gaps across UseCases and Repositories. It identifies modules carrying too many responsibilities including the TableFragment handling pagination, sorting, filtering, data fetching, and delete logic in a single class.  Here I also perform a self-audit on constants extraction, if/case branch coverage, and adherence to Android/Kotlin naming standards. Finally, this includes an assessment on commenting pratices within the artifact. 
 
 <div align="center"><em>VIDEO_PLACEHOLDER_3</em></div>
 
@@ -205,7 +205,7 @@ Before diving into the enhanced artifacts, the following video series presents a
 
 ## Artifact Navigation
 
-The three artifacts below each target a distinct pillar of computer science. They are not isolated exhibits — they are **interdependent enhancements to a single, cohesive application**. Each builds upon the others to produce a system greater than the sum of its parts.
+The three artifacts below each target a distinct pillar of computer science. However, instead of completing this work on three unique artifacts, a singular artifact was chosen from which specifc portions are pulled as the source artifacts as they are **interdependent enhancements to a single, cohesive application**. Each builds upon the others to produce a system greater than the sum of its parts.
 
 <table>
 <tr>
