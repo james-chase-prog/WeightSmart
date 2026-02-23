@@ -3,7 +3,7 @@ layout: default
 title: WeightSmart — Professional Self-Assessment
 ---
 
-<div align="center">
+<div align="center" markdown="1">  
 
 # WeightSmart
 
