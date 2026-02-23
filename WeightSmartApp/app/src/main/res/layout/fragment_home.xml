@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="16dp"
+android:background="?attr/colorTertiary"
+android:fitsSystemWindows="true">
+
+<!-- Welcome Back Title -->
+<TextView
+    android:id="@+id/welcomeTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="WELCOME BACK:"
+    android:textSize="40sp"
+    android:textStyle="bold"
+    android:textColor="?attr/colorOnTertiary"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+<!-- Username/Nickname -->
+<TextView
+    android:id="@+id/userNameDisplay"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="user.nickname"
+    android:textSize="24sp"
+    android:textColor="?attr/colorOnTertiary"
+    android:textStyle="bold"
+    app:layout_constraintTop_toBottomOf="@id/welcomeTitle"
+    app:layout_constraintStart_toStartOf="parent"
+    android:layout_marginBottom="8dp" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/weightOverviewCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/userNameDisplay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="12dp"
+        app:strokeColor="?attr/colorOutline"
+        app:strokeWidth="2dp"
+        app:cardBackgroundColor="?attr/colorSurface">
+
+        <LinearLayout
+            android:id="@+id/weightOverview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center">
+
+            <!-- Current Weight Column -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:text="Current Weight:"
+                    android:textSize="24sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
+                <TextView
+                    android:id="@+id/currentWeightText"
+                    android:text="000.0"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
+            </LinearLayout>
+
+            <!-- Goal Weight Column -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+
+            <TextView
+                    android:text="Goal Weight:"
+                    android:textSize="24sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
+                <TextView
+                    android:id="@+id/goalWeightText"
+                    android:text="000.0"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Update Weight Section -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/updateWeightCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="12dp"
+        app:strokeColor="?attr/colorOutline"
+        app:strokeWidth="2dp"
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:layout_constraintTop_toBottomOf="@id/weightOverviewCard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Title -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/updateWeightButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UPDATE WEIGHT"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnPrimary"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                app:backgroundTint="?attr/colorPrimary"
+                app:strokeColor="?attr/colorTertiary"
+                app:strokeWidth="2dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Weight Field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weight"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/inputNewWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="000.0"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:padding="12dp"
+                android:background="@drawable/textview_background"
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:focusable="true"/>
+
+
+            <!-- Date Field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/inputDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="08/03/2025"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:padding="12dp"
+                android:background="@drawable/textview_background"
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Time Field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/inputTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="04:25 PM"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:padding="12dp"
+                android:background="@drawable/textview_background"
+                android:textColor="?attr/colorOnSurface"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

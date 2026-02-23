@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tableFragment"
+        android:icon="@drawable/outline_data_table_24"
+        android:title="Table" />
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/outline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/graphFragment"
+        android:icon="@drawable/outline_chart_data_24"
+        android:title="Graph" />
+</menu>

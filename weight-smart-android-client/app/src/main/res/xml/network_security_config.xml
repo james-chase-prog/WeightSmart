@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Network Security Configuration
+  Allows cleartext HTTP for local development server only.
+
+  10.0.2.2 = Android emulator's alias for host machine localhost
+  localhost = For physical devices on same network (if needed)
+
+  TODO(PRODUCTION): Remove this file and the networkSecurityConfig reference in
+  AndroidManifest.xml before production release. Replace with:
+  1. HTTPS endpoint in NetworkModule.kt (change BASE_URL to https://your-domain.com)
+  2. SSL certificate pinning for additional security (optional but recommended):
+     <domain-config>
+         <domain includeSubdomains="true">your-domain.com</domain>
+         <pin-set>
+             <pin digest="SHA-256">your-certificate-pin-hash</pin>
+         </pin-set>
+     </domain-config>
+-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <domain includeSubdomains="true">localhost</domain>
+    </domain-config>
+</network-security-config>

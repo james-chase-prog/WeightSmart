@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph_fragment_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:padding="16dp"
+    android:background="?attr/colorSurfaceVariant"
+    tools:context=".ui.analytics.AnalyticsFragment">
+
+    <!-- Weight Trend Line Chart -->
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/weight_line_chart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/weight_graph_description"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/period_toggle_group"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.50" />
+
+    <!-- Gold Star Marker (positioned programmatically over chart) -->
+    <ImageView
+        android:id="@+id/goal_star"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/sharp_kid_star_24"
+        android:contentDescription="@string/goal_weight_marker"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:ignore="MissingConstraints" />
+
+    <!-- Loading Indicator (overlays chart during API calls) -->
+    <ProgressBar
+        android:id="@+id/loading_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/weight_line_chart"
+        app:layout_constraintBottom_toBottomOf="@id/weight_line_chart"
+        app:layout_constraintStart_toStartOf="@id/weight_line_chart"
+        app:layout_constraintEnd_toEndOf="@id/weight_line_chart" />
+
+    <!-- Time Period Filter Buttons -->
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/period_toggle_group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        app:layout_constraintTop_toBottomOf="@id/weight_line_chart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_week"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/period_week" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_month"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/period_month" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_year"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/period_year" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_five_year"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/period_five_year" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_lifetime"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/period_lifetime" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <!-- Stats Cards Row -->
+    <LinearLayout
+        android:id="@+id/stats_cards_row"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/period_toggle_group"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- BMI Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stat_bmi"
+                    style="?attr/textAppearanceLabelMedium"
+                    android:textColor="?attr/colorTertiary" />
+
+                <TextView
+                    android:id="@+id/stat_bmi_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bmi_unavailable"
+                    style="?attr/textAppearanceHeadlineSmall" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Total Change Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="4dp"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stat_total_change"
+                    style="?attr/textAppearanceLabelMedium"
+                    android:textColor="?attr/colorTertiary" />
+
+                <TextView
+                    android:id="@+id/stat_total_change_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bmi_unavailable"
+                    style="?attr/textAppearanceHeadlineSmall" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Change/Week Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stat_weekly_change"
+                    style="?attr/textAppearanceLabelMedium"
+                    android:textColor="?attr/colorTertiary" />
+
+                <TextView
+                    android:id="@+id/stat_weekly_change_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bmi_unavailable"
+                    style="?attr/textAppearanceHeadlineSmall" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,94 @@
+# -------------------------
+# OS / general
+# -------------------------
+.DS_Store
+Thumbs.db
+*.log
+
+# -------------------------
+# IntelliJ / Android Studio
+# -------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# -------------------------
+# Android / Gradle
+# -------------------------
+**/.gradle/
+**/build/
+local.properties
+*.apk
+*.aab
+captures/
+.externalNativeBuild/
+.cxx/
+
+# -------------------------
+# Java / Spring Boot / Maven
+# -------------------------
+# Build output
+**/target/
+
+# Keep Maven Wrapper (commit these)
+!.mvn/
+!.mvn/wrapper/
+!.mvn/wrapper/maven-wrapper.jar
+!mvnw
+!mvnw.cmd
+
+# Eclipse/STS metadata (don’t commit)
+.classpath
+.project
+.settings/
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache/
+
+# -------------------------
+# Optional: Node tooling (only if you have it)
+# -------------------------
+node_modules/
+.env
+.env.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# -------------------------
+# Working documents (not for repo)
+# -------------------------
+/_working_docs/
+
+# -------------------------
+# Nested repos (separate git remotes)
+# -------------------------
+/eportfolio/
+/james-chase-prog.github.io/
+
+# -------------------------
+# Claude Code local settings
+# -------------------------
+.claude/
+
+# -------------------------
+# Misc junk files
+# -------------------------
+nul
+**/weight_smart_client.txt
+**/weight_smart_server.txt
+**/Artifact_Source_Code.txt
+**/full_project_code.txt
+**/buildlog.txt
+**/*~$*
+
+# Android Studio metadata accidentally created at the android-client root
+/weight-smart-android-client/AndroidProjectSystem.xml
+/weight-smart-android-client/misc.xml
+/weight-smart-android-client/modules.xml
+/weight-smart-android-client/workspace.xml
+/weight-smart-android-client/caches/
+/weight-smart-android-client/libraries/
+/weight-smart-android-client/modules/

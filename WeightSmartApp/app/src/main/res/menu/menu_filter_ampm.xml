@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/filter_am"
+        android:title="Show AM Entries" />
+    <item
+        android:id="@+id/filter_pm"
+        android:title="Show PM Entries" />
+    <item
+        android:id="@+id/filter_clear_time"
+        android:title="Clear Time Filter" />
+</menu>

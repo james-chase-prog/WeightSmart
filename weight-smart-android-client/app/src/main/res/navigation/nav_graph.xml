@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.weightsmart.client.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/graphFragment"
+        android:name="com.weightsmart.client.ui.analytics.AnalyticsFragment"
+        android:label="Graph"
+        tools:layout="@layout/fragment_graph" />
+
+    <fragment
+        android:id="@+id/tableFragment"
+        android:name="com.weightsmart.client.ui.table.TableFragment"
+        android:label="Table"
+        tools:layout="@layout/fragment_table" />
+</navigation>

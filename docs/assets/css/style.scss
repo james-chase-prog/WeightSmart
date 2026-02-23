@@ -1,0 +1,99 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* Wider container for tables and diagrams */
+.wrapper {
+  max-width: 1060px !important;
+}
+
+/* Centered div support */
+div[align="center"] {
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Badge spacing */
+img[src*="shields.io"] {
+  display: inline-block;
+  margin: 3px;
+}
+
+/* Artifact navigation cards */
+table td {
+  vertical-align: top;
+  padding: 12px;
+}
+
+/* Blockquote accent styling */
+blockquote {
+  border-left: 4px solid #00696E;
+  background: #f4fafa;
+  padding: 12px 16px;
+  margin: 20px 0;
+  font-style: normal;
+}
+
+blockquote p {
+  margin: 0;
+}
+
+/* Code block styling */
+pre {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+/* Navigation bar between pages */
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin: 24px 0;
+  border-top: 1px solid #dae4e5;
+  border-bottom: 1px solid #dae4e5;
+}
+
+.page-nav a {
+  color: #00696E;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.page-nav a:hover {
+  text-decoration: underline;
+}
+
+/* Stat highlight boxes */
+.highlight-box {
+  background: #f4fafa;
+  border: 1px solid #dae4e5;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px 0;
+}
+
+/* Table header accent */
+th {
+  background: #00696E;
+  color: white;
+  padding: 8px 12px;
+}
+
+td {
+  padding: 8px 12px;
+}
+
+/* Horizontal rule accent */
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, #00696E, #4E5F7D, #dae4e5);
+  margin: 32px 0;
+}

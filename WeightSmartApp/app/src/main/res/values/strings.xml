@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">WeightSmart</string>
+    <string name="weightsmart">WeightSmart</string>
+    <string name="create_account"> New User? Create Account Here!</string>
+    <string name="input_email">Email</string>
+    <string name="input_password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="log_in">Log In</string>
+    <string name="username">Username</string>
+    <string name="welcome_message">Welcome to WeightSmart</string>
+    <string name="nickname">Nickname</string>
+    <string name="delete_entry">Delete Entry</string>
+    <string name="profile_button">Button to Access Account</string>
+    <string name="profile_avatar">Avatar Image</string>
+    <string name="weight_graph_description">Graph Showing weight changes in a line graph form.</string>
+    <string name="goal_weight_marker">Start at goal weight</string>
+    <string name="page_x_of_y">Page %1$d of %2$d</string>
+
+
+</resources>

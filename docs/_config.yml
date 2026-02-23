@@ -1,0 +1,9 @@
+theme: jekyll-theme-minimal
+title: WeightSmart
+description: A Full-Stack Health Analytics Platform | CS-499 Capstone ePortfolio
+baseurl: /WeightSmart
+show_downloads: false
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false

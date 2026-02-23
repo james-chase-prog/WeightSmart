@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">WeightSmart</string>
+    <string name="weightsmart">WeightSmart</string>
+    <string name="create_account"> New User? Create Account Here!</string>
+    <string name="input_email">Email</string>
+    <string name="input_password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="log_in">Log In</string>
+    <string name="username">Username</string>
+    <string name="welcome_message">Welcome to WeightSmart</string>
+    <string name="nickname">Nickname</string>
+    <string name="delete_entry">Delete Entry</string>
+    <string name="profile_button">Button to Access Account</string>
+    <string name="profile_avatar">Avatar Image</string>
+    <string name="goal_weight_marker">Start at goal weight</string>
+    <string name="undo">UNDO</string>
+    <string name="share_weight_logs">Share Weight Logs</string>
+    <string name="profile_saved">Profile updated.</string>
+    <string name="logout">LOG OUT</string>
+    <string name="logout_confirm">Logged out.</string>
+
+    <!-- P8: Analytics Screen -->
+    <string name="period_week">1W</string>
+    <string name="period_month">1M</string>
+    <string name="period_year">1Y</string>
+    <string name="period_five_year">5Y</string>
+    <string name="period_lifetime">ALL</string>
+    <string name="stat_bmi">BMI</string>
+    <string name="stat_total_change">Total Change</string>
+    <string name="stat_weekly_change">Change/Week</string>
+    <string name="bmi_unavailable">\u2014</string>
+    <string name="weight_graph_description">Weight trend chart</string>
+    <string name="graph_data_error">Unable to load graph data</string>
+    <string name="lbs_format">%+.1f lbs</string>
+    <string name="lbs_per_week_format">%+.1f lbs/wk</string>
+    <string name="bmi_format">%.1f</string>
+
+</resources>

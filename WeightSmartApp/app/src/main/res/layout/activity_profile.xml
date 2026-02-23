@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="?attr/colorSurfaceVariant">
+
+    <!-- Welcome Header -->
+    <TextView
+        android:id="@+id/profile_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello Nickname!"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+        android:textColor="?attr/colorOnBackground"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Nickname Field -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nicknameLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Nickname"
+        app:layout_constraintTop_toBottomOf="@id/profile_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nicknameField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Goal Weight Field -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/goalWeightLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Goal Weight"
+        app:layout_constraintTop_toBottomOf="@id/nicknameLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/goalWeightField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Goal Date Field -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/goalDateLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Goal Date"
+        app:layout_constraintTop_toBottomOf="@id/goalWeightLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/goalDateField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="date"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Customization label -->
+    <TextView
+        android:id="@+id/customization_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Customization:"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+        app:layout_constraintTop_toBottomOf="@id/goalDateLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"/>
+
+    <!-- Light and Dark Mode Buttons -->
+    <LinearLayout
+        android:id="@+id/theme_toggle_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/customization_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp">
+
+        <Button
+            android:id="@+id/light_mode_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Light Mode"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" | "
+            android:paddingHorizontal="8dp"
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/dark_mode_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dark Mode"/>
+    </LinearLayout>
+
+    <!-- Avatar Upload Row -->
+    <TextView
+        android:id="@+id/avatar_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avatar:"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+        app:layout_constraintTop_toBottomOf="@id/theme_toggle_row"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        android:layout_marginTop="24dp"/>
+
+    <ImageButton
+        android:id="@+id/avatar_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:backgroundTint="?attr/colorPrimaryContainer"
+        android:contentDescription="@string/profile_avatar"
+        android:scaleType="centerCrop"
+        android:src="@drawable/outline_account_circle_24"
+        app:layout_constraintTop_toBottomOf="@id/theme_toggle_row"
+        app:layout_constraintStart_toEndOf="@id/avatar_label"/>
+
+    <Button
+        android:id="@+id/opt_in_sms_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Opt In to SMS"
+        app:layout_constraintTop_toBottomOf="@id/avatar_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"/>
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Exit Button -->
+    <Button
+        android:id="@+id/exit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EXIT"
+        android:textColor="@android:color/holo_red_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="24dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
