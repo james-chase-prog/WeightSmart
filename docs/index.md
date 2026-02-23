@@ -44,7 +44,7 @@ My time at SNHU began in January 2024 as a complete novice to coding, software d
 
 <strong>Where I Started</strong>
 <br><br>
-The very first class I took at SNHU was <strong>IT-140: Introduction to Scripting</strong>. I learned the foundations of Python and how to work with an IDE. The final project was a simple text-based adventure game: <strong>one file, 293 lines</strong>, no classes, no memory management, no complex data structures — just unformatted print-to-console statements.
+The very first class I took at SNHU was <strong>IT-140: Introduction to Scripting</strong>. I learned the foundations of Python and how to work with an IDE. The final project was a simple text-based adventure game: <strong>one file, 293 lines</strong>, no classes, no memory management, no complex data structures, and a number of unformatted print-to-console statements.
 <br><br>
 <em>That was the beginning.</em>
 
@@ -53,7 +53,7 @@ The very first class I took at SNHU was <strong>IT-140: Introduction to Scriptin
 
 <strong>Where I Am Now</strong>
 <br><br>
-The capstone project is a <strong>distributed full-stack ecosystem</strong>: a Spring Boot server with JWT authentication, a Kotlin Android client with MVVM architecture, offline-first synchronization, encrypted local storage, and adaptive server-side downsampling algorithms — spanning <strong>80+ files</strong> across two codebases.
+The capstone project is a <strong>distributed full-stack ecosystem</strong>: a Spring Boot server with JWT authentication, a Kotlin Android client with MVVM architecture, offline-first synchronization, encrypted local storage, and adaptive server-side downsampling algorithms.  This comprehensive projects spans <strong>80+ files</strong> across two codebases.
 <br><br>
 <em>The distance between these two points is the value of this program.</em>
 
@@ -61,9 +61,9 @@ The capstone project is a <strong>distributed full-stack ecosystem</strong>: a S
 </tr>
 </table>
 
-Critical software engineering principles — object-oriented programming, UI/UX design, DRY, and Separation of Concerns — were tackled progressively across the curriculum. **CS-305 (Software Security)** introduced me to dependency checks, Spring servers, and Spring Security, which proved foundational to this capstone. Courses covering the Software Development Lifecycle introduced Waterfall, Agile, UML diagrams, and sequence diagrams — essential coordination tools for complex projects across diverse teams.
+Critical software engineering principles including object-oriented programming, UI/UX design, DRY, and Separation of Concerns were tackled progressively across the curriculum. **CS-305 (Software Security)** introduced me to dependency checks, Spring servers, and Spring Security, which proved foundational to this capstone. Courses covering the Software Development Lifecycle introduced Waterfall, Agile, UML diagrams, and sequence diagrams all required for coordination of complex projects across diverse teams; and the latter three of which were implemented in the management of this project.
 
-Later courses in Client/Server architecture, Android development, and Full-Stack Development (where a static HTML page was transformed into a dynamic MEAN stack web application) provided both the motivation and the technical skills required to transition the Android application from **CS-360 (Mobile Architecture & Programming)** into a full-stack distributed system.
+Later courses in Client/Server architecture, Android development, and Full-Stack Development (where a static HTML page was transformed into a dynamic MEAN stack web application) provided both the motivation and the technical skills required to transition the Android application from **CS-360 (Mobile Architecture & Programming)** into a custom full-stack distributed system.
 
 ---
 
