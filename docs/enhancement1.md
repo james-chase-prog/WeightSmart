@@ -3,7 +3,7 @@ layout: default
 title: "Artifact 1: Software Engineering & Design"
 ---
 
-<div align="center">
+<div align="center" markdown="1">
 
 # Artifact 1: Software Engineering & Design
 
@@ -22,7 +22,7 @@ title: "Artifact 1: Software Engineering & Design"
 
 <div class="page-nav">
 <a href="./">&larr; Self-Assessment</a>
-<a href="milestone2">Artifact 2: Algorithms &rarr;</a>
+<a href="enhancement2">Artifact 2: Algorithms &rarr;</a>
 </div>
 
 ## What Existed Before
@@ -178,5 +178,5 @@ The scope was deliberately reduced from the original blueprint to prioritize **d
 
 <div class="page-nav">
 <a href="./">&larr; Self-Assessment</a>
-<a href="milestone2">Artifact 2: Algorithms &rarr;</a>
+<a href="enhancement2">Artifact 2: Algorithms &rarr;</a>
 </div>

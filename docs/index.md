@@ -211,32 +211,32 @@ The three artifacts below each target a distinct pillar of computer science. How
 <tr>
 <td align="center" width="33%">
 
-<h3><a href="milestone1">Software Engineering & Design</a></h3>
+<h3><a href="enhancement1">Software Engineering & Design</a></h3>
 <em>The architectural foundation</em>
 <br><br>
 MVVM refactoring, Hilt DI, offline-first sync pipeline, clean separation of concerns across every screen
 <br><br>
-<a href="milestone1"><strong>Explore Artifact 1 &rarr;</strong></a>
+<a href="enhancement1"><strong>Explore Artifact 1 &rarr;</strong></a>
 
 </td>
 <td align="center" width="33%">
 
-<h3><a href="milestone2">Algorithms & Data Structures</a></h3>
+<h3><a href="enhancement2">Algorithms & Data Structures</a></h3>
 <em>The intelligence layer</em>
 <br><br>
 Trie search, Token Bucket rate limiting, adaptive downsampling, moving average computation
 <br><br>
-<a href="milestone2"><strong>Explore Artifact 2 &rarr;</strong></a>
+<a href="enhancement2"><strong>Explore Artifact 2 &rarr;</strong></a>
 
 </td>
 <td align="center" width="33%">
 
-<h3><a href="milestone3">Databases</a></h3>
+<h3><a href="enhancement3">Databases</a></h3>
 <em>The persistence strategy</em>
 <br><br>
 Room + PostgreSQL dual-layer, delta sync, schema optimization, encrypted local storage, B-tree indexing
 <br><br>
-<a href="milestone3"><strong>Explore Artifact 3 &rarr;</strong></a>
+<a href="enhancement3"><strong>Explore Artifact 3 &rarr;</strong></a>
 
 </td>
 </tr>
@@ -244,7 +244,7 @@ Room + PostgreSQL dual-layer, delta sync, schema optimization, encrypted local s
 
 ---
 
-<div align="center">
+<div align="center" markdown="1">
 
 [Back to Main Portfolio](https://james-chase-prog.github.io) | [View Source Code](https://github.com/james-chase-prog/WeightSmart)
 

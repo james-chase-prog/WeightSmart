@@ -3,7 +3,7 @@ layout: default
 title: "Artifact 2: Algorithms & Data Structures"
 ---
 
-<div align="center">
+<div align="center" markdown="1">
 
 # Artifact 2: Algorithms & Data Structures
 
@@ -21,8 +21,8 @@ title: "Artifact 2: Algorithms & Data Structures"
 ---
 
 <div class="page-nav">
-<a href="milestone1">&larr; Artifact 1: Software Engineering</a>
-<a href="milestone3">Artifact 3: Databases &rarr;</a>
+<a href="enhancement1">&larr; Artifact 1: Software Engineering</a>
+<a href="enhancement3">Artifact 3: Databases &rarr;</a>
 </div>
 
 ## What Existed Before
@@ -196,6 +196,6 @@ The implementation went beyond the original Module One blueprint in several mean
 ---
 
 <div class="page-nav">
-<a href="milestone1">&larr; Artifact 1: Software Engineering</a>
-<a href="milestone3">Artifact 3: Databases &rarr;</a>
+<a href="enhancement1">&larr; Artifact 1: Software Engineering</a>
+<a href="enhancement3">Artifact 3: Databases &rarr;</a>
 </div>

@@ -3,7 +3,7 @@ layout: default
 title: "Artifact 3: Databases"
 ---
 
-<div align="center">
+<div align="center" markdown="1">
 
 # Artifact 3: Databases
 
@@ -21,7 +21,7 @@ title: "Artifact 3: Databases"
 ---
 
 <div class="page-nav">
-<a href="milestone2">&larr; Artifact 2: Algorithms</a>
+<a href="enhancement2">&larr; Artifact 2: Algorithms</a>
 <a href="./">Self-Assessment &rarr;</a>
 </div>
 
@@ -48,7 +48,7 @@ This artifact was selected because the data storage implementation reflected a m
 
 ## Indexing Strategy: Designing Computing Solutions
 
-The project encompassed designing and evaluating computing solutions through indexing decisions. The username column uses a Hash index for O(1) equality lookups during authentication — login, JWT validation, and profile retrieval are all equality-only queries (WHERE username = ?), making Hash the optimal structure. Because JPA's @Index annotation only supports B-tree, this required a schema.sql file with PostgreSQL-native DDL (CREATE INDEX ... USING hash), executed after Hibernate's auto-DDL via deferred datasource initialization. Prefix search is handled entirely by the in-memory milestone2, so the database index never needs to support range or LIKE queries. The UNIQUE constraint on username still maintains its own B-tree for duplicate prevention.
+The project encompassed designing and evaluating computing solutions through indexing decisions. The username column uses a Hash index for O(1) equality lookups during authentication — login, JWT validation, and profile retrieval are all equality-only queries (WHERE username = ?), making Hash the optimal structure. Because JPA's @Index annotation only supports B-tree, this required a schema.sql file with PostgreSQL-native DDL (CREATE INDEX ... USING hash), executed after Hibernate's auto-DDL via deferred datasource initialization. Prefix search is handled entirely by the in-memory enhancement2, so the database index never needs to support range or LIKE queries. The UNIQUE constraint on username still maintains its own B-tree for duplicate prevention.
 
 
 ```
@@ -175,6 +175,6 @@ The scope significantly exceeded the original Module One plan: sync metadata fie
 ---
 
 <div class="page-nav">
-<a href="milestone2">&larr; Artifact 2: Algorithms</a>
+<a href="enhancement2">&larr; Artifact 2: Algorithms</a>
 <a href="./">Self-Assessment &rarr;</a>
 </div>
