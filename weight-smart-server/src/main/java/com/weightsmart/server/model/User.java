@@ -24,8 +24,9 @@ import java.util.Collections;
  * ensuring data integrity before logic even runs.  Applies RBAC and security extensions.
  *
  * Key Concepts & Documentation:
- * B-Tree Indexing: The {@code unique=true} attribute automatically creates B-Tree indexes
- * for O(log n) lookup performance. <a href="https://www.postgresql.org/docs/current/sql-createindex.html">Reference: PostgreSQL Indexes</a>
+ * Indexing: The {@code unique=true} attribute automatically creates B-Tree indexes for constraint
+ * enforcement. A separate Hash index on username provides O(1) equality lookups for authentication.
+ * <a href="https://www.postgresql.org/docs/current/sql-createindex.html">Reference: PostgreSQL Indexes</a>
  * BCrypt Hashing: Passwords are never stored in plaintext. They are hashed using the BCrypt algorithm.
  * <a href="https://docs.spring.io/spring-security/reference/api/java/org/springframework/security/crypto/bcrypt/BCrypt.html">Reference: BCrypt Algorithm</a>
  * Lombok: Used for generation of getter, setter, toString, Builder, NoArgsConstructor, AllArgsConstructor methods
@@ -48,11 +49,9 @@ import java.util.Collections;
 @Entity  //Hibernate: Class to database table (generates SQL)
 /*
  * @Table name of database is users.
- * @Indexes: Production hash index for O(1) look-up
+ * Hash index on username created via schema.sql (JPA only supports B-tree)
  */
-@Table(name = "users", indexes =  {
-        @Index(name = "idx_users_username", columnList = "username")
-})
+@Table(name = "users")
 @Data //Lombok: Generates Getters, Setters, toString(), equals(), and hashCode()
 @NoArgsConstructor //Lombok: Generates blank constructor public User() {}
 @AllArgsConstructor //Lombok: Generates constructor with all arguments passed
