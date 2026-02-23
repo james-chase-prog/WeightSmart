@@ -28,17 +28,27 @@ captures/
 # -------------------------
 # Java / Spring Boot / Maven
 # -------------------------
-# Build output
 **/target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+*.class
+*.ctxt
+.mtj.tmp/
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+HELP.md
 
-# Keep Maven Wrapper (commit these)
-!.mvn/
-!.mvn/wrapper/
-!.mvn/wrapper/maven-wrapper.jar
-!mvnw
-!mvnw.cmd
+# Maven Wrapper (generated, not needed in repo)
+.mvn/
+mvnw
+mvnw.cmd
 
-# Eclipse/STS metadata (don’t commit)
+# Eclipse / STS metadata
 .classpath
 .project
 .settings/
@@ -47,12 +57,27 @@ captures/
 .springBeans
 .sts4-cache/
 
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
 # -------------------------
-# Optional: Node tooling (only if you have it)
+# Environment / secrets
 # -------------------------
-node_modules/
 .env
 .env.*
+weight-smart-server/src/main/resources/application-dev.properties
+
+# -------------------------
+# Node tooling (if present)
+# -------------------------
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -84,7 +109,7 @@ nul
 **/buildlog.txt
 **/*~$*
 
-# Android Studio metadata accidentally created at the android-client root
+# Android Studio metadata accidentally created at wrong paths
 /weight-smart-android-client/AndroidProjectSystem.xml
 /weight-smart-android-client/misc.xml
 /weight-smart-android-client/modules.xml
