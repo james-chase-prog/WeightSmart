@@ -123,7 +123,7 @@ I view software development as a team sport, where the quality of collaboration 
 
 Regardless of the quality of your work, if you are unable to explain it to both technical and non-technical audiences, the work loses most of its value. Effective engineering requires the ability to translate technical complexity into clear business value.
 
-I have developed the skill to present architectural plans to diverse stakeholders, ensuring alignment on goals and constraints. This involves maintaining living documentation and priority matrices that function as product roadmaps — making deliberate decisions about what to build, what to defer, and what to sunset, with clear rationale for each.
+I have developed the skill to present architectural plans to diverse stakeholders, ensuring alignment on goals and constraints. This involves maintaining living documentation and detailed sprint planning where I detailed decisions about what to build, what to defer, and what to sunset, with clear rationale for each.
 
 ---
 
@@ -188,13 +188,13 @@ Focusing on anticipating adversarial exploits during development allows me to mi
 
 ## Code Review: The Original Artifact
 
-Before diving into the enhanced artifacts, the following video series presents a structured code review of the **original CS-360 monolith** — the application as it existed before any capstone enhancements. These reviews establish the baseline that motivated every architectural decision documented in the enhancement narratives that follow. The original source code is available [here](https://github.com/james-chase-prog/WeightSmart/tree/main/WeightSmartApp).
+Before diving into the enhanced artifacts, the following video series presents a structured code review of the **original CS-360 monolith** prior to any capstone enhancements. These reviews establish the baseline that motivated every architectural decision documented in the enhancement narratives that follow. The original source code is available [here](https://github.com/james-chase-prog/WeightSmart/tree/main/WeightSmartApp).
 
 **Video 1: Architectural Integrity & MVVM Implementation** — This review examines the original application's package structure, revealing that while Clean Architecture layers were present (core, data, domain, UI), the MVVM pattern was incomplete. ViewModels existed as empty stubs while Fragments directly injected and called UseCases resulting in bypassing the undeveloped ViewModel layer entirely. The review identifies dead code, monolithic leftovers such as unused injections and stub implementations, and assesses the application's readiness for client-server communication. Within this assessment I assess the complete absence of networking libraries and API interfaces.
 
 <div align="center"><em>[Full Code Review](https://youtu.be/kxVFK3ui6yA)</em></div>
 
-**Video 2: Defensive Programming & Security Audit** — This review audits input validation across registration fields (username bounds, password length, email regex, weight range), identifies gaps such as missing bounds checks in the Weight factory method and absent network timeout configuration, and evaluates floating-point handling. The review highlights both strengths such as BigDecimal rounding, zero-division guards, epsilon comparisons for floating-point equality as well as areas for improvement, including resource management patterns and the need for defensive null-safety when transitioning from local Room queries to server JSON responses. Here I also discuss how transitioning to a distributed architecture changes the security needs and the decision to implement JWT authentication. 
+**Video 2: Defensive Programming & Security Audit** — This review audits input validation across registration fields (username bounds, password length, email regex, weight range), identifies gaps such as missing bounds checks in the Weight factory method and absent network timeout configuration. The review highlights both strengths such as BigDecimal rounding, zero-division guards, epsilon comparisons for floating-point equality as well as areas for improvement, including resource management patterns and the need for defensive null-safety when transitioning from local Room queries to server JSON responses. Here I also discuss how transitioning to a distributed architecture changes the security needs and the decision to implement JWT authentication. 
 
 <div align="center"><em>VIDEO_PLACEHOLDER_2</em></div>
 
