@@ -146,7 +146,7 @@ Architectural decisions required evaluating trade-offs throughout the project. E
 
 - Choosing a **hash index on usernames** for O(1) authentication lookups versus **B-tree on emails** for less frequent registration searches -- matching the index strategy to the access pattern rather than applying one approach uniformly
 - Choosing **server-wins conflict resolution** for sync rather than last-write-wins or manual merge -- recognizing that for a single-user health app, the server's version is always the most authoritative
-- Choosing **manual SyncWorkerFactory** over `@HiltWorker` due to kapt/Kotlin 2.x metadata incompatibility -- demonstrating the pragmatism to find workarounds when ideal approaches are blocked by toolchain limitations
+- Choosing **manual SyncWorkerFactory** over `@HiltWorker` due to kapt/Kotlin 2.x metadata incompatibility -- demonstrating the pragmatism to find workarounds when ideal approaches are unavaiable due to tool comparability issues. 
 - Deliberately **reducing scope** from the Angular + HAPI FHIR blueprint to prioritize depth -- the engineering judgment to know when depth of implementation outweighs breadth of scope
 
 ### Collaborative Environments
@@ -164,13 +164,13 @@ This documentation standardization directly addresses the need to **employ strat
 
 This portfolio itself consistiing of the self-assessment, the three enhancement narratives, and the ePortfolio website demonstrates the ability to **communicate technical complexity to diverse audiences**. The system architecture diagram above, the request lifecycle diagrams in controller headers, and the milestone narratives are designed to be readable by both technical reviewers and non-technical stakeholders.
 
-The decision to maintain a living priority matrix (P0-P8) throughout development functioned as a product roadmap helping make deliberate, transparent decisions about what to build, what to defer, and what to sunset, with clear rationale for each.
+The decision to maintain live sprint plan (P0-P8) throughout development functioned as a product roadmap helping make deliberate, transparent decisions about what to build, what to defer, and what to sunset, with clear rationale for each.
 
 ---
 
 ## Reflection
 
-The process of enhancing WeightSmart was a lesson in managing complexity. The biggest challenge was the offline-first synchronization -- designing a system where data flows bidirectionally between a local SQLite cache and a remote PostgreSQL database with conflict resolution, tombstone tracking, and retry logic.
+The process of enhancing WeightSmart was a lesson in managing complexity. The biggest challenge was the offline-first synchronizatio. Thsi involved designing a system where data flows bidirectionally between a local SQLite cache and a remote PostgreSQL database with conflict resolution, tombstone tracking, and retry logic.
 
 The scope was deliberately reduced from the original blueprint to prioritize **depth over breadth**. The implemented Android + Spring Boot stack demonstrates the full range of planned skills in architecture, mobile design, full-stack development, secure coding, system integration.  Learning to focus in on scope allowed thorough work to be completed without the dilution of adding a third platform. The unified REST API contract was designed to support future Angular consumption without modification.
 
