@@ -50,7 +50,7 @@ This artifact was selected because the data storage implementation reflected a m
 
 ## Indexing Strategy: Designing Computing Solutions
 
-The project encompassed designing and evaluating computing solutions through indexing decisions. The username column uses a Hash index for O(1) equality lookups during authentication — login, JWT validation, and profile retrieval are all equality-only queries (WHERE username = ?), making Hash the optimal structure. Because JPA's @Index annotation only supports B-tree, this required a schema.sql file with PostgreSQL-native DDL (CREATE INDEX ... USING hash), executed after Hibernate's auto-DDL via deferred datasource initialization. Prefix search is handled entirely by the in-memory enhancement2, so the database index never needs to support range or LIKE queries. The UNIQUE constraint on username still maintains its own B-tree for duplicate prevention.
+The project encompassed designing and evaluating computing solutions through indexing decisions. The username column uses a Hash index for O(1) equality lookups during authentication — login, JWT validation, and profile retrieval are all equality-only queries (WHERE username = ?), making Hash the optimal structure. Because JPA's @Index annotation only supports B-tree, this required a schema.sql file with PostgreSQL-native DDL (CREATE INDEX ... USING hash), executed after Hibernate's auto-DDL via deferred initialization. Prefix search is handled entirely by the in-memory enhancement2, so the database index never needs to support range or LIKE queries. The UNIQUE constraint on username still maintains its own B-tree for duplicate prevention.
 
 
 ```
@@ -89,7 +89,7 @@ Mark isSynced = true       (server-wins on
 in Room                    ID collision)
 ```
 
-**Phase 1 (PUSH)** finds all local records with `isSynced = 0` and pushes them to the server. Soft-deleted entries trigger `DELETE` requests; new entries trigger `POST` requests. Individual failures are isolated -- one failed entry doesn't block the rest.
+**Phase 1 (PUSH)** finds all local records with `isSynced = 0` and pushes them to the server. Soft-deleted entries trigger `DELETE` requests; new entries trigger `POST` requests. Individual failures are isolated resulting in one failed entry doesn't block the rest.
 
 **Phase 2 (PULL)** uses either an initial full-pull (100 records via pagination on first login) or a delta pull via `GET /sync?since={timestamp}` for subsequent syncs. Active records are UPSERTed (server-wins); tombstones (`isDeleted = true`) trigger local hard-deletes.
 
@@ -109,7 +109,7 @@ The tombstone pattern coordinates distributed deletion across clients that may b
 
 ### Network Resilience
 
-The sync system provides four layers of resilience: `ConnectivityObserver` (triggers sync on network restore via `callbackFlow`), WorkManager constraints (`NetworkType.CONNECTED` + battery-aware), retry with exponential backoff (3 attempts, 30s initial), and per-entry error isolation. This ensures the user never has to think about network state -- data is always available locally, and synchronization happens transparently.
+The sync system provides four layers of resilience: `ConnectivityObserver` (triggers sync on network restore via `callbackFlow`), WorkManager constraints (`NetworkType.CONNECTED` + battery-aware), retry with exponential backoff (3 attempts, 30s initial), and per-entry error isolation. This ensures the user never has to think about network statr because of data is always available locally and synchronization happens at multiple stages to ensure data integrity. 
 
 ---
 
@@ -118,8 +118,6 @@ The sync system provides four layers of resilience: `ConnectivityObserver` (trig
 ### Optimistic Locking
 
 Both `User` and `WeightEntry` entities carry `@Version` fields. Hibernate auto-increments the version on every UPDATE and includes `WHERE version = ?` in the SQL. If two concurrent requests modify the same row, the second receives a `StaleObjectStateException` thus preventing silent data corruption.
-
-> **Bug Discovery**: Adding `@Version` to `User.java` caused existing database rows (with `version = NULL`) to throw `DataIntegrityViolationException` on every save. The fix required both a code change (`columnDefinition = "integer default 0"`, `version = 0`) and a database backfill. This was a valuable lesson in the gap between schema design theory and production deployment reality.
 
 ### Transactional Atomicity
 
@@ -159,7 +157,7 @@ The UUID decision is particularly significant -- it demonstrates understanding t
 This enhancement is strongest at demonstrating mastery of **databases and software engineering**. But it touches all five outcomes:
 
 - **Designing and evaluating computing solutions**: B-tree vs Hash index trade-offs matched to query patterns; `Page` vs `Slice` optimization eliminating unnecessary COUNT queries; UUID vs SERIAL primary keys for offline ID generation
-- **Innovative techniques**: 3-phase offline-first sync protocol, `Persistable<UUID>` for client-generated IDs, WorkManager with `CoroutineWorker` for battery-aware background sync, delta sync with high-watermark timestamps, Tink AES-256-GCM encryption
+- **Innovative techniques**: 3-phase offline-first sync protocol, `Persistable<UUID>` for client-generated IDs, WorkManager with `CoroutineWorker` for background sync, delta sync with timestamps, amd Tink AES-256-GCM encryption
 - **Security mindset**: DTO layer prevents data leakage, `@PastOrPresent` prevents future-date manipulation, Spring Profiles externalize production credentials, `@Transactional` ensures atomicity, optimistic locking prevents concurrent corruption
 - **Collaborative environments**: During this phase I was very aggressive towards ensuring code commenting was thorough and descriptive -- universally adapting file header comments designed to be self-documenting and educational, providing direct links to relevant documentation on the systems and libraries employed
 - **Professional communications**: This narrative articulates the tombstone insight, the `@Version` bug discovery, and the indexing trade-off reasoning for both technical reviewers and non-technical stakeholders
